@@ -6,7 +6,7 @@ export default defineConfig({
   title: '每日一记',
   description: '论文心得与日常记录',
   lang: 'zh-CN',
-  base: '/',
+  base: '/vicliuuuu/',
   themeConfig: {
     nav: [
       { text: '首页', link: '/' },
