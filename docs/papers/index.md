@@ -15,6 +15,6 @@ date: 2025-03-22
 
 写完后在本页或侧边栏里加上链接（可在 `.vitepress/config.mjs` 的 `sidebar` 里维护列表）。
 
-## 示例条目
+## 论文
 
-- [示例：如何组织一篇读论文笔记](./example-paper-note.md)
+- [grad-nav](./grad-nav.md)
