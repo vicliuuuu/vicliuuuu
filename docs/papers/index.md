@@ -18,3 +18,4 @@ date: 2025-03-22
 ## 论文
 
 - [grad-nav](./grad-nav.md)
+- [CLIP](./CLIP.md)

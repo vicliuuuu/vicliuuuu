@@ -24,7 +24,7 @@ export default defineConfig({
     socialLinks: [],
     footer: {
       message: '个人记录',
-      copyright: 'Copyright © 2025'
+      copyright: 'Copyright © 2026'
     },
     search: {
       provider: 'local'
