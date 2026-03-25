@@ -73,5 +73,5 @@ date: 2026-03-23
 文章中的GRaD-Nav框架结合了 3DGS 和 DDRL，使得它能够通过高质量的视觉数据和真实的物理模拟来训练无人机的导航策略。3DGS 提供了非常高保真的环境表示，从而弥补了传统模拟器中视觉信息不够真实的缺陷。可微分的动力学仿真允许在训练中反向传播梯度，优化控制策略，从而加速了训练过程。
 不过尽管文中提到GRaD-Nav展示了强大的zero-shot sim-to-real 转移能力，但是否真的有较强的泛化性存疑？
 
-## 相关工作（可选）
+## 相关工作
 [GRaD-Nav++: Vision-Language Model Enabled Visual Drone Navigation with Gaussian Radiance Fields and Differentiable Dynamics](https://arxiv.org/abs/2506.14009)
