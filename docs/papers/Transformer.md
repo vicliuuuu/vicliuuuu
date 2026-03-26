@@ -480,8 +480,10 @@ class Transformer(nn.Module):
         B, N_tgt = tgt_ids.shape
 
         # ===== 1. Embedding + Positional Encoding =====
+        # 输出 (B, N, dim)
         src = self.src_emb(src_ids) * math.sqrt(self.dim)  # 缩放嵌入（论文建议）
         tgt = self.tgt_emb(tgt_ids) * math.sqrt(self.dim)
+        # 位置编码，已经在函数内部包含了语义+位置信息
         src = self.pos_enc(src)
         tgt = self.pos_enc(tgt)
 
@@ -528,6 +530,7 @@ model = Transformer(
 
 # 模拟数据
 B, N_src, N_tgt = 2, 5, 4   (batchsize, 源序列长度，目标序列长度)
+# 随机生成一个(B, N_src)的矩阵，实际是从词表中找到特定的token
 src_ids = torch.randint(1, src_vocab_size, (B, N_src))  # 假设 0 是 <pad>
 tgt_ids = torch.randint(1, tgt_vocab_size, (B, N_tgt))
 

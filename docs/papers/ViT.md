@@ -31,11 +31,25 @@ Transformer凭借自注意力机制成为NLP的主流框架，它不再依赖RNN
 
 ViT应运而生！ViT的三大贡献可以归纳维：1. 极简设计：直接将标准 Transformer 应用于图像 patch 序列，几乎不做修改；2. 颠覆认知：证明大规模数据可以替代 CNN 的归纳偏置，挑战了 CV 的基本假设；3. 开启新范式：为后续 MAE、Swin、DeiT 等工作铺路，推动 “纯 Transformer 视觉模型” 时代到来。
 
+![image1](../images/ViT1.png)
+
+图中展示了ViT的经典结构，假设现在有一个224*224*3的图像，输入ViT处理。ViT的输入为：图像+标签
+
+1. 图像分块，将224*224*3的图像进行分块处理，划分为patch_size=16*16的patch，所以对应的就会有14*14个patch。
+
+2. 将patch进行展开，本来一个patch是16*16*3个向量，这里展开为一个768维向量。
+
+3. 线性投影，将768维的向量投影到dim(例如256)特征维度上，这就等价于Transformer的embedding dim
+
+4. 拼接class token，class token之后的作用是一个相当于集成了全局信息的token
+
+5. 加入位置编码，class token设置为0，如这里一共197*256维位置编码，pos_embed.shape = (1, N+1, D)。这里和transformer有一点不一样，原来的transformer不可学习，有相对位置结构，是sin/cos的固定函数，但是这里是完全自由学习的位置编码，等同于ViT让模型自己学每个位置。
+
+6. 送入transformer encoder
+
+7. 取class token经过MLP做分类
 
 
-想看 Patch Embedding 的数学形式？
-想理解 [class] token 和位置编码 如何工作？
-想分析 为什么 1D 位置编码对 2D 图像有效？
 
 ## 一些想法
 
