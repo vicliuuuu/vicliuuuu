@@ -85,17 +85,23 @@ class PatchEmbedding(nn.Module):
     """Image to Patch Embedding"""
     def __init__(self, img_size=224, patch_size=16, in_chans=3, embed_dim=768):
         super().__init__()
-        num_patches = (img_size // patch_size) ** 2
+        # 图像大小
         self.img_size = img_size
         self.patch_size = patch_size
-        self.num_patches = num_patches
 
+        # patch的数量
+        num_patches = (img_size // patch_size) ** 2
+        self.num_patches = num_patches
+        # 步长为patch_size的卷积，不进行跨patch的信息融合；输出一个768维的14*14的张量
+        # 这一步对应论文中的Linear Projection of Flattened Patches
         self.proj = nn.Conv2d(in_chans, embed_dim, kernel_size=patch_size, stride=patch_size)
 
     def forward(self, x):
         B, C, H, W = x.shape
         assert H == self.img_size and W == self.img_size, \
             f"Input image size ({H}*{W}) doesn't match model ({self.img_size}*{self.img_size})."
+        # .flatten(2) 从第2维开始展平到最后，展开为(B,768,196)
+        # .transpose(1,2) 调整维度顺序，每个块对应所在区域的768维信息
         x = self.proj(x).flatten(2).transpose(1, 2)  # (B, N, D)
         return x
 
@@ -220,6 +226,30 @@ class VisionTransformer(nn.Module):
         cls_out = x[:, 0]  # (B, D)
         logits = self.head(cls_out)  # (B, num_classes)
         return logits
+
+
+'''
+# ViT-Base/16 配置（最常用）
+# 224*224的一个图像，每个patch为16*16，3通道输入，1000类，768个特征维度，Transformer Encoder的层数为12，特征头12个，每头64维，前馈网络的隐藏层相对于特征维数的4倍，在QKV中保留偏置项，注意力权重Dropout比例为0.1，防止注意力过于集中，提升泛化能力，Attention 输出和 MLP 输出上的 Dropout 比例为0.1，正则化，防止过拟合
+model = VisionTransformer(
+    img_size=224,
+    patch_size=16,
+    in_chans=3,
+    num_classes=1000,
+    embed_dim=768,
+    depth=12,
+    num_heads=12,
+    mlp_ratio=4.,
+    qkv_bias=True,
+    attn_drop=0.1,
+    proj_drop=0.1
+)
+
+# 测试前向传播
+x = torch.randn(2, 3, 224, 224)
+logits = model(x)
+print("Output shape:", logits.shape)  # torch.Size([2, 1000])
+'''
 ```
 
 ## 一些想法

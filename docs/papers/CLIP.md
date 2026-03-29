@@ -13,10 +13,9 @@ date: 2026-03-24
 
 ## 一句话概括
 
-把“图像”和“文本”映射到同一个语义空间，然后用相似度做匹配；首次通过大规模图像-文本对比学习，实现了无需任务特定微调的通用零样本图像分类能力。
+把图像和文本映射到同一个语义空间，然后用相似度做匹配；首次通过大规模图像-文本对比学习，实现了无需任务特定微调的通用零样本图像分类能力。
 
-## 方法要点
-
+## 背景介绍
 
 传统模型通过固定类别标签学习图像到预定义类别的映射，类别权重硬编码在模型中; **CLIP则通过对比学习对齐图像与自然语言的语义空间，推理时用文本描述动态生成类别权重，实现开放词汇的零样本分类**
 
@@ -285,7 +284,52 @@ transformer的本质是在做原始 embedding → 变换 → 新 embedding，或
 
 </details>
 
+## 思路框架
+
 CLIP的动机源于对传统计算机视觉范式局限性的深刻反思——以往的视觉模型依赖于人工标注的封闭类别标签进行训练，不仅成本高昂，而且无法泛化到训练时未见过的新概念，严重制约了模型在开放世界中的适用性；与此同时，自然语言处理领域近年来通过在海量原始文本上进行自监督预训练（如BERT、GPT等）取得了革命性突破，证明了语言本身蕴含的强大语义学习能力，这启发CLIP作者提出一个关键洞见：如果人类能通过语言描述理解新物体，那么视觉系统是否也能以自然语言作为监督信号来学习视觉概念？由此，CLIP的核心思想便是摒弃固定类别标签，转而利用互联网上天然存在的大规模图像-文本对，通过构建一个双编码器架构（图像编码器与文本编码器），在共享的嵌入空间中以对比学习的方式对齐视觉与语言语义，使得模型在预训练阶段学会判断“哪段文字最能描述这张图”；这种对齐使得在下游任务中，无需任何微调，仅需将目标类别转化为自然语言提示（如“a photo of a dog”），用文本编码器生成对应的语义向量，再与图像特征计算相似度，即可实现开放词汇、零样本的图像识别，从而将视觉理解从封闭的标签空间解放到开放的人类语言空间。
+
+### Natural Language Supervision：语言即监督信号
+
+CLIP的核心主张就是自然语言本身就是一种强大且可扩展的监督信息，可用于学习通用的视觉表示。在NLP以及ViT的快速发展下，技术相对成熟，且相对传统方法可扩展性更强，数据天然丰富，不仅学表示，还能对齐语言。CLIP实际是在构建一个vision-language alignment space
+
+### Creating a Sufficiently Large Dataset：大规模数据集
+
+这部分的提出主要是因为现有公开图文数据集太小或质量太差，无法释放自然语言监督的潜力，必须构建新数据集。CLIP构建了WIB(WebImageText), 规模达到4亿对，来源于多种公开网络资源，使用50万个查询词作为种子，每个query最多采20000对，实现语言复杂度核多样性。可以说没有WIT，就无法训练出强大的跨模态对齐模型
+
+### Selecting an Efficient Pre-Training Method 选择一种高效的预训练方法
+
+这部分是CLIP论文中最关键的技术转折点，对于海量的数据，训练效率是成败关键，必须选择一个能快速收敛，适合大规模扩展的预训练目标。作者发现：对比学习在视觉领域比生成式目标更高效，且能学到更好的表示，进而提出了新的任务：**给定一批 N 个 (image, text) 对，模型只需判断哪一对是真实的配对，而不是生成文本内容**，这就极大的简化了任务，将序列生成任务简化成了多分类匹配任务。
+
+```text
+Given a batch of N (image, text) pairs, CLIP is trained to predict which of the N × N possible (image, text) pairings across a batch actually occurred. To do this, CLIP learns a multi-modal embedding space by jointly training an image encoder and text encoder to maximize the cosine similarity of the image and text embeddings of the N real pairs in the batch while minimizing the cosine similarity of the embeddings of the N² − N incorrect pairings. We optimize a symmetric cross entropy loss over these similarity scores.
+```
+
+```plaintext
+# image_encoder - ResNet or Vision Transformer
+# text_encoder - CBOW or Text Transformer
+# I[n, h, w, c] - minibatch of aligned images
+# T[n, l] - minibatch of aligned texts
+# W_i[d_i, d_e] - learned proj of image to embed
+# W_t[d_t, d_e] - learned proj of text to embed
+# t - learned temperature parameter
+
+# extract feature representations of each modality
+I_f = image_encoder(I)      # [n, d_i]
+T_f = text_encoder(T)       # [n, d_t]
+
+# joint multimodal embedding [n, d_e]
+I_e = l2_normalize(np.dot(I_f, W_i), axis=1)
+T_e = l2_normalize(np.dot(T_f, W_t), axis=1)
+
+# scaled pairwise cosine similarities [n, n]
+logits = np.dot(I_e, T_e.T) * np.exp(t)
+
+# symmetric loss function
+labels = np.arange(n)
+loss_i = cross_entropy_loss(logits, labels, axis=0)
+loss_t = cross_entropy_loss(logits, labels, axis=1)
+loss = (loss_i + loss_t) / 2
+```
 
 
 
