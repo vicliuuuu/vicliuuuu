@@ -5,13 +5,13 @@
 
 ## 神作
 
-- [CLIP](./CLIP.md)
 - [Transformer](./Transformer.md)
-- [ViT](./ViT.md)
 
 ## 论文
 
 - [grad-nav](./grad-nav.md)
+- [CLIP](./CLIP.md)
+- [ViT](./ViT.md)
 
 ## 怎么新增一篇
 
