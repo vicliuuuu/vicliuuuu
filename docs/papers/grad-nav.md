@@ -74,4 +74,5 @@ date: 2026-03-23
 不过尽管文中提到GRaD-Nav展示了强大的zero-shot sim-to-real 转移能力，但是否真的有较强的泛化性存疑？
 
 ## 相关工作
+
 [GRaD-Nav++: Vision-Language Model Enabled Visual Drone Navigation with Gaussian Radiance Fields and Differentiable Dynamics](https://arxiv.org/abs/2506.14009)

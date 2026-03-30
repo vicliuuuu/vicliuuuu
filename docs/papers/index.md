@@ -9,9 +9,13 @@
 
 ## 论文
 
-- [grad-nav](./grad-nav.md)
-- [CLIP](./CLIP.md)
+- [Grad-nav](./grad-nav.md)
 - [ViT](./ViT.md)
+- [CLIP](./CLIP.md)
+- [OWL-ViT](./OWL-ViT.md)
+- [DETR](./DETR.md)
+- [RTDETR](./RTDETR.md)
+
 
 ## 怎么新增一篇
 
