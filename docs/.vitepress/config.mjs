@@ -1,6 +1,5 @@
 import { defineConfig } from 'vitepress'
 
-
 // 若仓库是「项目页」而非 username.github.io，请把 base 改成 '/仓库名/'
 // 例如仓库叫 my-blog：base: '/my-blog/'
 export default defineConfig({
@@ -32,5 +31,3 @@ export default defineConfig({
     }
   }
 })
-
-
