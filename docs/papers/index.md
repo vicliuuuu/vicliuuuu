@@ -12,7 +12,7 @@
 
 ## 论文
 
-- [Grad-nav](./Grad-nav.md)
+- [Grad-nav](./grad-nav.md)
 - [OWL-ViT](./OWL-ViT.md)
 - [RTDETR](./RTDETR.md)
 - [Deformable DETR](./Deformable-DETR.md)
