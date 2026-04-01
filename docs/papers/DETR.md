@@ -102,6 +102,8 @@ y₃      0   1   0
 
 DETR实际是三个模块的组合：
 
+![image1](../images/detr1.png)
+
 ```text
 Image
   ↓
@@ -161,6 +163,8 @@ query₃ → ∅
 
 模型最终会输出 object query = 一组“可学习的向量”，本质就是一组参数，query 不是预测结果，而是模型内部的“输入信号”。每个 query 输出一个 object prediction。DETR的本质是用一组slot去解释场景。object query = 一组可学习的“找物体的槽位（slot）”，它不是预测，而是生成预测的“起点”。这里的query不是之前谈到的匹配方法中进行二分匹配的对应的N个预测，这里query是一个隐藏向量，没有类别概率，没有box,;是经过了FFN之后，query会输出为prediction，得到对应的(class probability, box);这个prediction才是与GT进行二分匹配的。
 
+encoder部分是划分成了nxn个patch token在学习，但是decoder部分是N个query槽位在理解。
+
 ### auxiliary decoding losses 辅助损失
 
 DETR不仅在最后一层算 loss，而是在每一层 decoder 后都算 loss，也就是：
@@ -174,6 +178,8 @@ Decoder Layer L → loss（最终）
 
 每一层都有：FFN → prediction → Hungarian matching → loss；如果只在最后一层监督，query 需要经过很多层才知道自己该干嘛，很难进行纠正；而加了auxiliary loss会逐步变好。
 
+DETR的匹配过程是GT去找对应的query
+
 ## 一些想法
 
 DETR 的主要优点在于它提出了一种端到端的目标检测范式，将传统检测器中复杂的组件（如 anchor 设计、NMS 后处理等）全部移除，直接将检测问题建模为集合预测问题（set prediction）。通过引入 Transformer 和 object query，模型能够进行全局建模，并显式学习物体之间的关系，同时借助匈牙利匹配实现一对一分配，避免重复检测。这种设计结构简洁、思路统一，也为后续的 object-centric 表示学习和 slot-based 方法提供了重要启发。
@@ -183,4 +189,6 @@ DETR 的主要优点在于它提出了一种端到端的目标检测范式，将
 ## 相关工作
 [DETRsBeat YOLOsonReal-time Object Detection](https://arxiv.org/abs/2304.08069)
 
-[RT-DETRv2: Improved Baseline with Bag-of-Freebies for Real-Time Detection Transformer](https://arxiv.org/abs/2407.17140)
+[RT-DETRv2:Improved Baseline with Bag-of-Freebies for Real-Time Detection Transformer](https://arxiv.org/abs/2407.17140)
+
+[DEFORMABLE DETR:DEFORMABLE TRANSFORMERS FOR END-TO-END OBJECT DETECTION](https://arxiv.org/abs/2010.04159)

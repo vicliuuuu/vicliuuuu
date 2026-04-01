@@ -6,15 +6,17 @@
 ## 神作
 
 - [Transformer](./Transformer.md)
+- [ViT](./ViT.md)
+- [CLIP](./CLIP.md)
+- [DETR](./DETR.md)
 
 ## 论文
 
-- [Grad-nav](./grad-nav.md)
-- [ViT](./ViT.md)
-- [CLIP](./CLIP.md)
+- [Grad-nav](./Grad-nav.md)
 - [OWL-ViT](./OWL-ViT.md)
-- [DETR](./DETR.md)
 - [RTDETR](./RTDETR.md)
+- [Deformable DETR](./Deformable-DETR.md)
+- [Yolo-World](./YOLO-WORLD.md)
 
 
 ## 怎么新增一篇

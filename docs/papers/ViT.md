@@ -256,3 +256,7 @@ print("Output shape:", logits.shape)  # torch.Size([2, 1000])
 
 ViT的篇幅其实并不多，但是已经说明白了其核心思想，极具价值；它首次将Transformer应用到图像领域，它甚至没怎么改整体的框架，不过实现了前人没有做到的事情，这就是贡献！
 
+
+## 相关工作
+
+[Vision Transformer with Deformable Attention](https://arxiv.org/abs/2201.00520)
