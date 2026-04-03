@@ -80,3 +80,7 @@ RT-DETR在DETR基础上进行了改进：1. 保精度，提速度 —> 关键点
 ## 相关工作
 
 [RT-DETRv2: Improved Baseline with Bag-of-Freebies for Real-Time Detection Transformer](https://arxiv.org/abs/2407.17140)
+
+<video controls style="width: 90%; max-width: 720px; display: block; margin: 16px auto;">
+  <source src="../images/rt-detrv4.mp4" type="video/mp4">
+</video>
