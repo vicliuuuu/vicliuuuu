@@ -260,3 +260,5 @@ ViT的篇幅其实并不多，但是已经说明白了其核心思想，极具�
 ## 相关工作
 
 [Vision Transformer with Deformable Attention](https://arxiv.org/abs/2201.00520)
+
+[Emerging Properties in Self-Supervised Vision Transformers](https://arxiv.org/abs/2104.14294)

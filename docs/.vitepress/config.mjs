@@ -4,14 +4,15 @@ import { defineConfig } from 'vitepress'
 // 例如仓库叫 my-blog：base: '/my-blog/'
 export default defineConfig({
   title: '每日一记',
-  description: '论文心得与日常记录',
+  description: '论文心得、日常记录与实验日志',
   lang: 'zh-CN',
   base: '/vicliuuuu/',
   themeConfig: {
     nav: [
       { text: '首页', link: '/' },
       { text: '论文心得', link: '/papers/' },
-      { text: '日记', link: '/diary/' }
+      { text: '日记', link: '/diary/' },
+      { text: '实验记录', link: '/experiments/' }
     ],
     sidebar: {
       '/papers/': [
@@ -19,6 +20,9 @@ export default defineConfig({
       ],
       '/diary/': [
         { text: '日记索引', link: '/diary/' }
+      ],
+      '/experiments/': [
+        { text: '实验日志', link: '/experiments/' }
       ]
     },
     socialLinks: [],

@@ -3,21 +3,31 @@
 在这里用 Markdown 写读论文的笔记。每篇可以单独一个文件，便于版本管理与搜索。
 
 
-## 神作
+## 夯
 
 - [Transformer](./Transformer.md)
 - [ViT](./ViT.md)
 - [CLIP](./CLIP.md)
 - [DETR](./DETR.md)
+- [DINO](./DINO.md)
 
-## 论文
+## 顶级
+
+- [Yolo-World](./YOLO-WORLD.md)
+- [BYOL](./BYOL.md)
+
+## 人上人
+
+- [RTDETR](./RTDETR.md)
+- [OWL-ViT](./OWL-ViT.md)
+
+## 一般
+
+- [Deformable DETR](./Deformable-DETR.md)
+
+## NPC
 
 - [Grad-nav](./grad-nav.md)
-- [OWL-ViT](./OWL-ViT.md)
-- [RTDETR](./RTDETR.md)
-- [Deformable DETR](./Deformable-DETR.md)
-- [Yolo-World](./YOLO-WORLD.md)
-
 
 ## 怎么新增一篇
 

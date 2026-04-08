@@ -4,7 +4,7 @@ layout: home
 hero:
   name: 每日一记
   text: 论文与日常
-  tagline: 读论文的心得 · 生活里的片段
+  tagline: 读论文的心得 · 生活里的片段 · 实验记录
   actions:
     - theme: brand
       text: 论文心得
@@ -12,12 +12,17 @@ hero:
     - theme: alt
       text: 日记
       link: /diary/
+    - theme: brand        
+      text: 实验记录
+      link: /experiments/
 
 features:
   - title: 论文心得
     details: 记录读文献时的想法、方法对比与可复现笔记。
   - title: 日记
     details: 像现在这样，把某一天的心情与琐事写下来留档。
+  - title: 实验
+    details: 记录实验设计、过程、结果与反思。
 ---
 
 ## 本地预览与发布
