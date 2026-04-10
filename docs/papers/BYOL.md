@@ -1,9 +1,9 @@
 ---
-title: RTDETR 阅读汇报
-date: 2026-03-31
+title: BYOL 阅读汇报
+date: 2026-04-08
 ---
 
-# RTDETR 阅读汇报
+# BYOL 阅读汇报
 
 ## 论文信息
 

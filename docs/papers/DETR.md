@@ -122,7 +122,7 @@ Set of objects
 
 3. Transformer Encoder-Decoder: Self-Attention/Cross-Attention + FFN；
 
-encoder部分：这里位置编码和ViT以及传统Transformer都不一样，DETR的positional encoding是z = z₀ + pos不会丢失空间信息，位置编码是2D的。经过多层encoder之后，输出：R^{d × HW}，每个位置都包含“全局上下文信息”，成为一个“全局理解后的 feature map”
+encoder部分：这里位置编码和传统Transformer一样，原文中使用的是固定的正弦和余弦函数来生成位置编码，这是一种非学习型的位置编码，不过DETR的positional encoding是二维的，z = z₀ + pos不会丢失空间信息，位置编码是2D的。对于一个坐标 pos 和维度 i，其编码值为：PE(pos, 2i) = sin(pos / 10000^(2i/d))，PE(pos, 2i+1) = cos(pos / 10000^(2i/d))。不过其长度都是d/2，进行拼接起来之后就是d就是最终的二维位置编码。经过多层encoder之后，输出：R^{d × HW}，每个位置都包含“全局上下文信息”，成为一个“全局理解后的 feature map”
 
 decoder部分：这里用N个object一起预测，并行输出，query₁ → object₁ query₂ → object₂同时进行；但结构本身没变。也有self-attention和cross-attention的交叉，这里有cross-attention是为了进行交互；此外，这里由于区分位置信息，初始化query₁, query₂, ..., query_N（随机），同时设定可学习向量，让每个query有不同的偏好，得到不用的object slot。
 

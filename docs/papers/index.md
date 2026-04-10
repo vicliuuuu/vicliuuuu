@@ -14,6 +14,7 @@
 ## 顶级
 
 - [Yolo-World](./YOLO-WORLD.md)
+- [Distillation](./Distillation.md)
 - [BYOL](./BYOL.md)
 
 ## 人上人
