@@ -499,7 +499,7 @@ class Transformer(nn.Module):
         # ===== 3. Encoder =====
         enc_out = src
         for layer in self.encoder_layers:
-            enc_out = layer(enc_out, src_mask=src_mask)
+            enc_out = layer(enc_out)
 
         # ===== 4. Decoder =====
         dec_out = tgt
