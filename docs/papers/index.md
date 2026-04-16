@@ -21,6 +21,7 @@
 
 - [RTDETR](./RTDETR.md)
 - [OWL-ViT](./OWL-ViT.md)
+- [LiT](./LiT.md)
 
 ## 一般
 
