@@ -35,17 +35,17 @@ ViT应运而生！ViT的三大贡献可以归纳维：1. 极简设计：直接�
 
 ![image1](../images/ViT1.png)
 
-图中展示了ViT的经典结构，假设现在有一个224*224*3的图像，输入ViT处理。ViT的输入为：图像+标签
+图中展示了ViT的经典结构，假设现在有一个224x224x3的图像，输入ViT处理。ViT的输入为：图像+标签
 
-1. 图像分块，将224*224*3的图像进行分块处理，划分为patch_size=16*16的patch，所以对应的就会有14*14个patch。
+1. 图像分块，将224x224x3的图像进行分块处理，划分为patch_size=16x16的patch，所以对应的就会有14x14个patch。
 
-2. 将patch进行展开，本来一个patch是16*16*3个向量，这里展开为一个768维向量。
+2. 将patch进行展开，本来一个patch是16x16x3个向量，这里展开为一个768维向量。
 
 3. 线性投影，将768维的向量投影到dim(例如256)特征维度上，这就等价于Transformer的embedding dim
 
 4. 拼接class token，class token之后的作用是一个相当于集成了全局信息的token
 
-5. 加入位置编码，class token设置为0，如这里一共197*256维位置编码，pos_embed.shape = (1, N+1, D)。这里和transformer有一点不一样，原来的transformer不可学习，有相对位置结构，是sin/cos的固定函数，但是这里是完全自由学习的位置编码，等同于ViT让模型自己学每个位置。
+5. 加入位置编码，class token设置为0，如这里一共197x256维位置编码，pos_embed.shape = (1, N+1, D)。这里和transformer有一点不一样，原来的transformer不可学习，有相对位置结构，是sin/cos的固定函数，但是这里是完全自由学习的位置编码，等同于ViT让模型自己学每个位置。
 
 6. 送入transformer encoder
 

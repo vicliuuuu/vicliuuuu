@@ -16,12 +16,14 @@
 - [Yolo-World](./YOLO-WORLD.md)
 - [Distillation](./Distillation.md)
 - [BYOL](./BYOL.md)
+- [LiT](./LiT.md)
+- [DINO+TEXT](./DINO+TEXT.md)
 
 ## 人上人
 
 - [RTDETR](./RTDETR.md)
 - [OWL-ViT](./OWL-ViT.md)
-- [LiT](./LiT.md)
+
 
 ## 一般
 
