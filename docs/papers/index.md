@@ -18,6 +18,7 @@
 - [BYOL](./BYOL.md)
 - [LiT](./LiT.md)
 - [DINO+TEXT](./DINO+TEXT.md)
+- [LaSt-ViT](./LaSt-ViT.md)
 
 ## 人上人
 
