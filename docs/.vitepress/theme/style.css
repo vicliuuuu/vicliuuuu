@@ -1,0 +1,14 @@
+/* 当 diary 页面未解锁时，立即把 VitePress 内容隐藏掉，
+   避免 SSR 出来的明文在 hydrate 之前闪现。
+   注意只是 visibility: hidden，元素仍占位，hydrate 不会报错。 */
+html.diary-locked .VPNav,
+html.diary-locked .VPLocalNav,
+html.diary-locked .VPSidebar,
+html.diary-locked .VPContent,
+html.diary-locked .VPFooter {
+  visibility: hidden !important;
+}
+
+html.diary-locked body {
+  overflow: hidden;
+}
