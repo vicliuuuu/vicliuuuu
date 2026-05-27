@@ -10,6 +10,8 @@
 - [CLIP](./CLIP.md)
 - [DETR](./DETR.md)
 - [DINO](./DINO.md)
+- [LoRA](./LoRA.md)
+- [LLaVA](./LLaVA.md)
 
 ## 顶级
 
